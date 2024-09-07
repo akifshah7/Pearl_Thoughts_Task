@@ -1,19 +1,18 @@
 import { create } from 'zustand';
-import { parseDate } from '@internationalized/date';
 
 // Define the Zustand store
-interface DatePickerState {
+type DatePickerState = {
   value: {
-    start: any;
-    end: any;
+    startDate: Date | undefined;
+    endDate: Date | undefined;
   };
-  setValue: (newValue: { start: any; end: any }) => void;
+  setValue: (newValue: { startDate: Date | undefined; endDate: Date | undefined }) => void;
 }
 
 const useDatePickerStore = create<DatePickerState>((set) => ({
   value: {
-    start: parseDate("2024-04-01"),
-    end: parseDate("2024-04-08"),
+    startDate: undefined ,
+    endDate: undefined,
   },
   setValue: (newValue) => set({ value: newValue }),
 }));

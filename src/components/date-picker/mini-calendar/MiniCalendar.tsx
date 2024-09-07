@@ -23,10 +23,10 @@ const MiniCalendar: React.FC = () => {
 
   useEffect(() => {
     console.log(value)
-    if (value.start && value.end && dailyRecurrence) {
+    if (value.startDate && value.endDate && dailyRecurrence) {
       const recurrenceDates = calculateRecurringDates(
-        value.start,
-        value.end,
+        value.startDate,
+        value.endDate,
         dailyRecurrence
       );
 

@@ -1,3 +1,5 @@
+"use client"
+
 import React from "react";
 import ReactDatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
@@ -7,24 +9,27 @@ const DatePickerComponent = () => {
   const { value, setValue } = useDatePickerStore();
 
   const handleChange = (dates) => {
-    const [start, end] = dates;
+    const [start, end] = dates || [null, null];
     setValue({
-      start: start,
-      end: end,
+      startDate: start,
+      endDate: end,
     });
   };
 
   return (
-    <div className="w-full flex justify-center" >
+    <div className="w-full justify-center flex">
       <ReactDatePicker
-   
+        selected={value?.startDate}
+        onChange={handleChange}
+        startDate={value?.startDate}
+        endDate={value?.endDate}
         selectsRange
         dateFormat="yyyy-MM-dd"
-        className="w-96 flex justify-center items-center bg-gray-100 border-2 border-gray-400 rounded-md p-2"
+        className="w-96 bg-gray-100 border-2 text-black border-gray-400 rounded-md p-2"
         placeholderText="Select a date range"
         isClearable
       />
-      </div>
+    </div>
   );
 };
 

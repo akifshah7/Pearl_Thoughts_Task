@@ -1,12 +1,11 @@
-import { formatDate } from "./dateFunctions";
 
 export const calculateRecurringDates = (
   start: Date,
   end: Date,
   interval: number
 ) => {
-  const formattedStartDate = formatDate(start);
-  const formattedEndDate = formatDate(end);
+  const formattedStartDate = start.toDateString();
+  const formattedEndDate = end.toDateString();
   const dates = [];
   let currentDate = new Date(formattedStartDate);
   let endDate = new Date(formattedEndDate);
