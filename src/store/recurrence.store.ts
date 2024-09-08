@@ -1,18 +1,23 @@
 import { create } from 'zustand';
+import { DayOfWeek } from '~/types';
 
 type RecurrenceState =  {
     repeatEvery: number;
     dailyRecurrence: number | null;
-    selectedDays: string[];
+    weeklyRecurrence: number | null;
+    selectedDays: DayOfWeek[];
     setRepeatEvery: (value: number) => void;
-    toggleDay: (day: string) => void;    
-    setDailyRecurrence: (day: number) => void;    
+    toggleDay: (day: DayOfWeek) => void;    
+    setDailyRecurrence: (day: number) => void;   
+    setWeeklyRecurrence: (day: number) => void;
   }
 
 const useRecurrenceStore = create<RecurrenceState>((set) => ({
   repeatEvery: 1,
   dailyRecurrence: null,
   setDailyRecurrence: (day) => set(() => ({dailyRecurrence: day})),
+  weeklyRecurrence: null,
+  setWeeklyRecurrence: (day) => set(() => ({weeklyRecurrence: day})),
   selectedDays: [],
   setRepeatEvery: (value) => set(() => ({ repeatEvery: value })),
   toggleDay: (day) => set((state) => {

@@ -5,7 +5,10 @@ import Calendar from "react-calendar";
 import "react-calendar/dist/Calendar.css";
 import useDatePickerStore from "~/store/datePicker.store";
 import useRecurrenceStore from "~/store/recurrence.store";
-import { calculateRecurringDates } from "~/utils/recurrenceFunctions";
+import {
+  calculateRecurringDates,
+  generateRecurrenceDates,
+} from "~/utils/recurrenceFunctions";
 
 type ValuePiece = Date | null;
 
@@ -19,10 +22,12 @@ const MiniCalendar: React.FC = () => {
   >(undefined);
 
   const { value } = useDatePickerStore();
-  const { dailyRecurrence } = useRecurrenceStore();
+  const { dailyRecurrence, weeklyRecurrence, selectedDays } =
+    useRecurrenceStore();
 
+  // for daily recurrence
   useEffect(() => {
-    console.log(value)
+    console.log(value);
     if (value.startDate && value.endDate && dailyRecurrence) {
       const recurrenceDates = calculateRecurringDates(
         value.startDate,
@@ -33,6 +38,20 @@ const MiniCalendar: React.FC = () => {
       setDailyRecurrenceDays(recurrenceDates);
     }
   }, [value, dailyRecurrence]);
+
+  // for weekly recurrence
+  useEffect(() => {
+    if (value.startDate && value.endDate && weeklyRecurrence && selectedDays.length) {
+      const weeklyRecurrenceDates = generateRecurrenceDates(
+        value.startDate,
+        value.endDate,
+        weeklyRecurrence,
+        selectedDays
+      );
+
+      setDailyRecurrenceDays(weeklyRecurrenceDates);
+    }
+  }, [value, weeklyRecurrence, selectedDays]);
 
   return (
     <div className="flex w-full justify-center">
