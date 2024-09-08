@@ -9,7 +9,6 @@ const WeeklyRecurrence = () => {
   const toggleDay = useRecurrenceStore((state) => state.toggleDay);
 
   const handleDayChange = (day: any) => {
-    console.log(day);
     toggleDay(day);
   };
 

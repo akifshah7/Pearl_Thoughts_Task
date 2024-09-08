@@ -3,16 +3,19 @@
 import React, { useState } from "react";
 import DailyRecurrence from "./recurrence-fields/DailyRecurrence";
 import WeeklyRecurrence from "./recurrence-fields/WeeklyRecurrence";
+import useRecurrenceStore from "~/store/recurrence.store";
 
 type Options = "Daily" | "Weekly" | undefined;
 
 const RecurrenceOptions = () => {
   const [recurrenceType, setRecurrenceType] = useState<Options>(undefined);
+  const { reset } = useRecurrenceStore();
 
   const handleRecurrenceChange = (
     event: React.ChangeEvent<HTMLInputElement>
   ) => {
     setRecurrenceType(event.target.value as Options);
+    reset();
   };
   return (
     <>

@@ -2,7 +2,6 @@ import useRecurrenceStore from "~/store/recurrence.store";
 
 const DailyRecurrence = () => {
   const recurrenceStore = useRecurrenceStore();
-  console.log(recurrenceStore.dailyRecurrence)
   return (
     <div className="w-full mt-4">
       <label>
