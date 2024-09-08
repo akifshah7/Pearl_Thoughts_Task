@@ -12,7 +12,6 @@ const DailyRecurrence = () => {
             recurrenceStore.setDailyRecurrence(Number(e.target.value))
           }
           className="bg-gray-100 w-full h-9 rounded-md p-2 active:border-none"
-          min="1"
           placeholder="Repeat every X day(s)"
         />
       </label>

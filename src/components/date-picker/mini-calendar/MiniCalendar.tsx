@@ -16,6 +16,7 @@ type Value = ValuePiece | [ValuePiece, ValuePiece];
 
 const MiniCalendar: React.FC = () => {
   const [date, setDate] = useState<Value>(new Date());
+  const [locale, setLocale] = useState("en-US");
 
   const [dailyRecurrenceDays, setDailyRecurrenceDays] = useState<
     Date[] | undefined
@@ -24,6 +25,12 @@ const MiniCalendar: React.FC = () => {
   const { value } = useDatePickerStore();
   const { dailyRecurrence, weeklyRecurrence, selectedDays } =
     useRecurrenceStore();
+
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      setLocale(navigator.language);
+    }
+  }, []);
 
   // for daily recurrence
   useEffect(() => {
@@ -41,7 +48,12 @@ const MiniCalendar: React.FC = () => {
 
   // for weekly recurrence
   useEffect(() => {
-    if (value.startDate && value.endDate && weeklyRecurrence && selectedDays.length) {
+    if (
+      value.startDate &&
+      value.endDate &&
+      weeklyRecurrence &&
+      selectedDays.length
+    ) {
       const weeklyRecurrenceDates = generateRecurrenceDates(
         value.startDate,
         value.endDate,
@@ -56,6 +68,7 @@ const MiniCalendar: React.FC = () => {
   return (
     <div className="flex w-full justify-center">
       <Calendar
+        locale={locale}
         tileClassName={({ date }) => {
           if (
             dailyRecurrenceDays &&

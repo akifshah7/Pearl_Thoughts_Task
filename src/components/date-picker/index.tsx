@@ -8,7 +8,7 @@ import useDatePickerStore from "~/store/datePicker.store";
 const DatePickerComponent = () => {
   const { value, setValue } = useDatePickerStore();
 
-  const handleChange = (dates) => {
+  const handleChange = (dates: any) => {
     const [start, end] = dates || [null, null];
     setValue({
       startDate: start,
